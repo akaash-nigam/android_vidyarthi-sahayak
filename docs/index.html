@@ -1,77 +1,694 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vidyarthi Sahayak - Student Learning Companion</title>
-    <meta name="description" content="Comprehensive educational app for Indian students with study materials, exam prep, scholarships, and career guidance.">
+    <title>विद्यार्थी सहायक - पढ़ाई का साथी | Vidyarthi Sahayak</title>
+    <meta name="description" content="विद्यार्थी सहायक - NCERT सॉल्यूशन, JEE/NEET तैयारी, छात्रवृत्ति खोजें, करियर गाइडेंस। मुफ्त शिक्षा हर बच्चे का अधिकार!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
-        .hero { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; padding: 100px 20px; text-align: center; }
-        .hero h1 { font-size: 3.5em; margin-bottom: 20px; font-weight: 700; }
-        .hero p { font-size: 1.3em; margin-bottom: 30px; opacity: 0.95; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
-        .section-title { text-align: center; font-size: 2.5em; margin-bottom: 50px; color: #2d3748; }
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
-        .feature-card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
-        .feature-icon { font-size: 3em; margin-bottom: 20px; }
-        .feature-card h3 { font-size: 1.5em; margin-bottom: 15px; color: #3b82f6; }
-        .screenshot-section { background: #f7fafc; padding: 80px 20px; text-align: center; }
-        footer { background: #2d3748; color: white; padding: 40px 20px; text-align: center; }
+        :root {
+            --saffron: #FF9933;
+            --white: #FFFFFF;
+            --green: #138808;
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --primary-light: #dbeafe;
+            --yellow: #fbbf24;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #eff6ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: #fff;
+        }
+
+        /* Tricolor Strip */
+        .tricolor-strip {
+            height: 6px;
+            background: linear-gradient(90deg, var(--saffron) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green) 66.66%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 100px 20px 60px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%23fff' d='M0,50 C360,100 1080,0 1440,50 L1440,100 L0,100 Z'/%3E%3C/svg%3E");
+            background-size: cover;
+        }
+
+        .govt-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 22px;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+
+        .header .tagline {
+            font-size: 1.3rem;
+            font-weight: 600;
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* Stats */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Download Button */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            color: var(--primary-dark);
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            margin-top: 20px;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Trust Section */
+        .trust-section {
+            background: var(--bg-light);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .trust-badge {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        /* Features Section */
+        .section {
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+            color: var(--primary-dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Exam Preparation */
+        .exams-section {
+            background: var(--primary-light);
+            padding: 60px 20px;
+        }
+
+        .exams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .exam-card {
+            background: white;
+            padding: 25px 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .exam-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .exam-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .exam-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .exam-card p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: #f9fafb;
+            padding: 60px 20px;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .author-name {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .author-location {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Scholarship Banner */
+        .scholarship-section {
+            background: linear-gradient(135deg, var(--yellow) 0%, #f59e0b 100%);
+            color: var(--text-dark);
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .scholarship-section h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .scholarship-section p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+
+        .scholarship-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .scholarship-stat {
+            background: rgba(255,255,255,0.3);
+            padding: 15px 25px;
+            border-radius: 12px;
+        }
+
+        .scholarship-stat .number {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .scholarship-stat .label {
+            font-size: 0.9rem;
+        }
+
+        /* Helpline Section */
+        .helpline-section {
+            background: var(--primary-dark);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .helpline-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .helpline-numbers {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .helpline-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 25px;
+            border-radius: 10px;
+        }
+
+        .helpline-item .number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--yellow);
+        }
+
+        .helpline-item .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .footer p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(37,211,102,0.4);
+            z-index: 1000;
+            text-decoration: none;
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .header .tagline { font-size: 1.1rem; padding: 8px 20px; }
+            .stats-bar { gap: 20px; }
+            .stat-number { font-size: 1.5rem; }
+            .section-title { font-size: 1.5rem; }
+        }
     </style>
 </head>
 <body>
-    <section class="hero">
+    <div class="tricolor-strip"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="govt-badge">
+            <span>🇮🇳</span>
+            <span>शिक्षा मंत्रालय | Digital India</span>
+        </div>
+
+        <img src="icon.png" alt="Vidyarthi Sahayak" class="app-icon">
+
         <h1>विद्यार्थी सहायक</h1>
-        <h2>Vidyarthi Sahayak</h2>
-        <p>Your Complete Study Companion</p>
-        <p>From Classroom to Career - Excellence in Education</p>
+        <p class="subtitle">Your Complete Study Companion</p>
+
+        <div class="tagline">📚 ज्ञान की शक्ति - पढ़ेगा इंडिया, बढ़ेगा इंडिया!</div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number">1 Cr+</div>
+                <div class="stat-label">विद्यार्थी</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50K+</div>
+                <div class="stat-label">वीडियो</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">छात्रवृत्ति</div>
+            </div>
+        </div>
+
+        <a href="#download" class="download-btn">
+            <span style="font-size: 1.5rem;">📲</span>
+            <span>अभी डाउनलोड करें - मुफ्त</span>
+        </a>
+    </header>
+
+    <!-- Trust Section -->
+    <section class="trust-section">
+        <div class="trust-badges">
+            <div class="trust-badge">⭐ 4.8 रेटिंग</div>
+            <div class="trust-badge">🔒 100% सुरक्षित</div>
+            <div class="trust-badge">🆓 पूरी तरह मुफ्त</div>
+            <div class="trust-badge">📴 ऑफलाइन पढ़ें</div>
+            <div class="trust-badge">🗣️ 12 भाषाएं</div>
+        </div>
     </section>
 
-    <div class="container">
-        <h2 class="section-title">Empowering Student Success</h2>
-        <div class="features">
+    <!-- Features -->
+    <section class="section">
+        <h2 class="section-title">📖 ऐप की विशेषताएं</h2>
+        <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">📖</div>
-                <h3>NCERT Solutions</h3>
-                <p>Complete solutions for NCERT textbooks from Class 1 to 12. Available in Hindi and English.</p>
+                <h3>NCERT सॉल्यूशन</h3>
+                <p>कक्षा 1 से 12 तक सभी विषयों के NCERT सॉल्यूशन। हिंदी और English दोनों में।</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🎯</div>
-                <h3>Exam Preparation</h3>
-                <p>Practice tests for JEE, NEET, UPSC, SSC, and state board exams with detailed explanations.</p>
+                <h3>परीक्षा तैयारी</h3>
+                <p>JEE, NEET, UPSC, SSC, बोर्ड परीक्षा - सभी के लिए प्रैक्टिस टेस्ट और मॉक पेपर।</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🎓</div>
-                <h3>Scholarship Finder</h3>
-                <p>Discover scholarships based on your merit, financial need, and category. Get application reminders.</p>
+                <h3>छात्रवृत्ति खोजें</h3>
+                <p>1000+ छात्रवृत्ति की जानकारी। आवेदन की अंतिम तारीख का रिमाइंडर।</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">📹</div>
-                <h3>Video Lessons</h3>
-                <p>Watch expert teacher videos for all subjects. Learn concepts with animations and real-world examples.</p>
+                <h3>वीडियो लेसन</h3>
+                <p>टॉप टीचर्स के वीडियो। एनिमेशन से समझें कठिन टॉपिक। डाउनलोड करके देखें।</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">💼</div>
-                <h3>Career Guidance</h3>
-                <p>Explore career options, entrance exam info, and college admissions. Chat with career counselors.</p>
+                <h3>करियर गाइडेंस</h3>
+                <p>कौन सा करियर चुनें? कॉलेज कैसे चुनें? एक्सपर्ट से बात करें।</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🤝</div>
-                <h3>Doubt Solving</h3>
-                <p>Ask questions 24/7 and get answers from teachers and peer community. Share and learn together.</p>
+                <h3>डाउट सॉल्विंग</h3>
+                <p>24/7 सवाल पूछें। टीचर और साथी छात्रों से जवाब पाएं। फोटो भेजकर पूछें।</p>
             </div>
         </div>
-    </div>
-
-    <section class="screenshot-section">
-        <h2 class="section-title">ज्ञान की शक्ति</h2>
-        <p style="color: #666; font-size: 1.2em; max-width: 800px; margin: 0 auto;">Supporting every student's journey from learning to achieving their dreams</p>
     </section>
 
-    <footer>
-        <p>&copy; 2024 Vidyarthi Sahayak. Empowering Students Across India with Quality Education.</p>
+    <!-- Exam Preparation -->
+    <section class="exams-section">
+        <h2 class="section-title" style="color: var(--primary-dark);">🎯 परीक्षा तैयारी</h2>
+        <div class="exams-grid">
+            <div class="exam-card">
+                <div class="exam-icon">🔬</div>
+                <h3>JEE Main/Advanced</h3>
+                <p>IIT में एडमिशन</p>
+            </div>
+            <div class="exam-card">
+                <div class="exam-icon">🩺</div>
+                <h3>NEET</h3>
+                <p>मेडिकल में एडमिशन</p>
+            </div>
+            <div class="exam-card">
+                <div class="exam-icon">📜</div>
+                <h3>UPSC</h3>
+                <p>सिविल सर्विस</p>
+            </div>
+            <div class="exam-card">
+                <div class="exam-icon">📝</div>
+                <h3>SSC/Bank</h3>
+                <p>सरकारी नौकरी</p>
+            </div>
+            <div class="exam-card">
+                <div class="exam-icon">📚</div>
+                <h3>Board Exams</h3>
+                <p>10th/12th बोर्ड</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scholarship Banner -->
+    <section class="scholarship-section">
+        <h2>🎓 छात्रवृत्ति का मौका मत चूकें!</h2>
+        <p>1000+ छात्रवृत्ति - मेरिट, आय और कैटेगरी के आधार पर</p>
+        <div class="scholarship-stats">
+            <div class="scholarship-stat">
+                <div class="number">₹5 लाख</div>
+                <div class="label">तक की छात्रवृत्ति</div>
+            </div>
+            <div class="scholarship-stat">
+                <div class="number">1000+</div>
+                <div class="label">छात्रवृत्ति योजनाएं</div>
+            </div>
+            <div class="scholarship-stat">
+                <div class="number">10 लाख</div>
+                <div class="label">छात्रों को मिली</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2 class="section-title">💬 विद्यार्थियों की राय</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"गांव में रहता हूं, कोचिंग नहीं जा पाता था। इस ऐप से JEE की तैयारी की और NIT में एडमिशन मिल गया!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👨‍🎓</div>
+                    <div>
+                        <div class="author-name">राहुल कुमार</div>
+                        <div class="author-location">मुजफ्फरपुर, बिहार</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"छात्रवृत्ति खोजने में बहुत मदद मिली। पोस्ट मैट्रिक स्कॉलरशिप के बारे में पता चला और ₹50,000 मिले!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👩‍🎓</div>
+                    <div>
+                        <div class="author-name">प्रिया शर्मा</div>
+                        <div class="author-location">जयपुर, राजस्थान</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"हिंदी में वीडियो मिलते हैं जो समझ आते हैं। NCERT के सारे सवालों के जवाब मिल जाते हैं।"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👨‍🎓</div>
+                    <div>
+                        <div class="author-name">अमित यादव</div>
+                        <div class="author-location">लखनऊ, उत्तर प्रदेश</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Helpline -->
+    <section class="helpline-section">
+        <h2>🆘 शिक्षा हेल्पलाइन</h2>
+        <div class="helpline-numbers">
+            <div class="helpline-item">
+                <div class="number">1800-180-5522</div>
+                <div class="label">नेशनल स्कॉलरशिप (मुफ्त)</div>
+            </div>
+            <div class="helpline-item">
+                <div class="number">14461</div>
+                <div class="label">शिक्षा हेल्पलाइन</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="section" style="text-align: center; background: var(--primary-light);">
+        <h2 class="section-title">📲 अभी डाउनलोड करें</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 30px; color: var(--text-light);">1 करोड़+ विद्यार्थियों के साथ जुड़ें</p>
+        <a href="#" class="download-btn" style="background: var(--primary); color: white;">
+            <span style="font-size: 1.5rem;">📲</span>
+            <span>Google Play से डाउनलोड करें</span>
+        </a>
+        <p style="margin-top: 20px; font-size: 0.95rem; color: var(--text-light);">✓ मुफ्त डाउनलोड &nbsp; ✓ कोई विज्ञापन नहीं &nbsp; ✓ ऑफलाइन पढ़ें</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#">होम</a>
+            <a href="#">विशेषताएं</a>
+            <a href="#">सहायता</a>
+            <a href="#">गोपनीयता नीति</a>
+            <a href="#">संपर्क करें</a>
+        </div>
+        <p>&copy; 2025 विद्यार्थी सहायक | पढ़ेगा इंडिया, बढ़ेगा इंडिया</p>
+        <p style="margin-top: 10px; font-size: 0.85rem;">उपलब्ध: हिंदी, English, मराठी, बंगाली, तमिल, तेलुगु, कन्नड़, गुजराती, पंजाबी, ओड़िया, मलयालम, असमी</p>
     </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/918888888888?text=मुझे%20विद्यार्थी%20सहायक%20ऐप%20के%20बारे%20में%20जानकारी%20चाहिए" class="whatsapp-float" target="_blank">
+        💬
+    </a>
 </body>
 </html>
