@@ -558,6 +558,134 @@
         </div>
     </section>
 
+    <!-- Student Education Infographic Section -->
+    <style>
+        .student-infographic-section {
+            background: linear-gradient(135deg, #dbeafe 0%, #fef3c7 100%);
+            padding: 60px 0;
+            width: 100%;
+        }
+        .student-infographic-container {
+            max-width: 1400px;
+            width: 95%;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .student-infographic-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .student-info-content {
+            padding-right: 20px;
+        }
+        .student-info-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .student-info-title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        .student-info-desc {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+        .student-feature-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+        }
+        .student-feature-icon {
+            font-size: 28px;
+        }
+        .student-feature-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .student-infographic-wrapper {
+            background: white;
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.15);
+            border: 3px solid var(--primary);
+        }
+        .student-infographic-wrapper img {
+            width: 100%;
+            border-radius: 16px;
+            display: block;
+        }
+        @media (max-width: 900px) {
+            .student-infographic-grid {
+                grid-template-columns: 1fr;
+            }
+            .student-info-content {
+                padding-right: 0;
+                text-align: center;
+            }
+            .student-feature-row {
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <section class="student-infographic-section">
+        <div class="student-infographic-container">
+            <div class="student-infographic-grid">
+                <!-- Left Column - Text Content -->
+                <div class="student-info-content">
+                    <span class="student-info-badge">📚 स्मार्ट स्टडी गाइड</span>
+                    <h2 class="student-info-title">पढ़ाई का स्मार्ट साथी!</h2>
+                    <p class="student-info-desc">
+                        Class 1-12 तक NCERT सॉल्यूशन, वीडियो लेसन, डाउट सॉल्विंग और
+                        टेस्ट सीरीज - सब कुछ एक ऐप में मुफ्त!
+                    </p>
+                    <div class="student-feature-row">
+                        <span class="student-feature-icon">📚</span>
+                        <span class="student-feature-text">NCERT सॉल्यूशंस</span>
+                    </div>
+                    <div class="student-feature-row">
+                        <span class="student-feature-icon">🎥</span>
+                        <span class="student-feature-text">वीडियो लेसन</span>
+                    </div>
+                    <div class="student-feature-row">
+                        <span class="student-feature-icon">❓</span>
+                        <span class="student-feature-text">डाउट सॉल्व करें</span>
+                    </div>
+                    <div class="student-feature-row">
+                        <span class="student-feature-icon">📊</span>
+                        <span class="student-feature-text">टेस्ट सीरीज</span>
+                    </div>
+                </div>
+                <!-- Right Column - Infographic -->
+                <div class="student-infographic-wrapper">
+                    <img src="infographic-student.png" alt="विद्यार्थी सहायक - स्टूडेंट एजुकेशन इन्फोग्राफिक">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Exam Preparation -->
     <section class="exams-section">
         <h2 class="section-title" style="color: var(--primary-dark);">🎯 परीक्षा तैयारी</h2>
